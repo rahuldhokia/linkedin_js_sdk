@@ -1,0 +1,37 @@
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  api_key: your key
+</script>
+
+<script type="text/javascript">
+function callLinkdin(){
+	IN.User.authorize(function() {
+		loadData();
+	});
+}
+
+function loadData() {
+  IN.API.Profile("me")
+    .fields(["id", "firstName", "lastName", "pictureUrl","headline","publicProfileUrl","date-of-birth","email-address","positions:(company:(name),title,summary)"])
+    .result(function(result) {
+
+      profile = result.values[0];
+      positions = profile.positions.values[0];
+
+      profHTML = "<p>IMAGE : <a href=\"" + profile.publicProfileUrl + "\">";
+      profHTML += "<img class=img_border align=\"left\" src=\"" + profile.pictureUrl + "\"></a>";
+      profHTML += "<a href=\"" + profile.publicProfileUrl + "\">";
+      profHTML += "<p>FIRST NAME : " + profile.firstName + "</p>";
+      profHTML += "<p>LAST NAME : " + profile.lastName + "</p>";
+      profHTML += "<p>EMAIL : " + profile.emailAddress + "</p>";
+      profHTML += "<p>COMPANY : " + positions.company.name + "</p>";
+      profHTML += "<p>POSITION : " + positions.title + "</p>";
+      profHTML += "<span class=myheadline>" + profile.headline + "</span>";
+      alert(profHTML);
+
+
+      return false;
+    });
+}
+</script>
+
+<div class='linkdin-button linkedin-image' onclick='callLinkdin();'>CLICK HERE</div>
