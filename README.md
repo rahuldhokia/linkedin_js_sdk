@@ -1,4 +1,4 @@
-linkedin_js_sdk
+linkedin-javascript-sdk
 ===============
 
 Linkedin Javascript SDK
